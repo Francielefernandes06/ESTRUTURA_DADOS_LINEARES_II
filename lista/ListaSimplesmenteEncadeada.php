@@ -2,8 +2,9 @@
 
 require_once __DIR__ . '/../NoComUnicaLigacao.php';
 require_once __DIR__ . '/../Processo.php';
+require_once __DIR__ . '/ListaIterator.php';
 
-class ListaSimplesmenteEncadeada {
+class ListaSimplesmenteEncadeada implements IteratorAggregate {
     private $inicio;
 
     public function __construct() {
@@ -63,6 +64,11 @@ class ListaSimplesmenteEncadeada {
             echo "Processo: " . $atual->{"dado"}->{"nome"} . " (Prioridade: " . $atual->{"dado"}->{"prioridade"} . ")\n";
             $atual = $atual->proximo;
         }
+    }
+
+    public function getIterator(): Traversable {
+        var_dump($this->inicio);
+        return new ListaIterator($this->inicio);
     }
 }
 
